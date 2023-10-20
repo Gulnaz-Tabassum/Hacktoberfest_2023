@@ -1,0 +1,237 @@
+//With the click of a button, this automation script in python empowers you to effortlessly enhance and manipulate your visuals like a pro, all without the need for expensive software or complex editing tools. This script leverages the popular Pillow module to optimize images.  It uses the Python Imaging Library (PIL) to crop, resize, flip, rotate, compress, blur, sharpen, adjust brightness, contrast, and add filters to an image.
+
+# Image Optimizing
+from PIL import Image, ImageFilter, ImageOps, ImageEnhance
+
+# Load the image
+im = Image.open("Image1.jpg")
+
+# Crop the image
+im = im.crop((34, 23, 100, 100))
+
+# Resize the image
+im = im.resize((50, 50))
+
+# Flip the image horizontally
+im = im.transpose(Image.FLIP_LEFT_RIGHT)
+
+# Rotate the image 360 degrees
+im = im.rotate(360)
+
+# Compress the image
+im.save("Image1.jpg", optimize=True, quality=90)
+
+# Apply blur effect
+im = im.filter(ImageFilter.BLUR)
+
+# Apply sharpening effect
+im = im.filter(ImageFilter.SHARPEN)
+
+# Adjust brightness
+enhancer = ImageEnhance.Brightness(im)
+im = enhancer.enhance(1.5)
+
+# Adjust contrast
+enhancer = ImageEnhance.Contrast(im)
+im = enhancer.enhance(1.5)
+
+# Add filters
+im = ImageOps.grayscale(im)
+im = ImageOps.invert(im)
+im = ImageOps.posterize(im, 4)
+
+# Save the optimized image
+im.save("Image1.jpg")
+2.Video Optimizer
+Video optimizers can be used to compress videos for storage or transmission, or to improve This script utilizes the Moviepy module to optimize videos by trimming, changing speed, adding audio, and applying visual effects (VFX).  It uses the moviepy library to trim, speed up, add audio, reverse, merge, add VFX, and add images to a video.
+
+# Video Optimizer
+import moviepy.editor as pyedit
+
+# Load the video
+video = pyedit.VideoFileClip("vid.mp4")
+
+# Trim the video
+vid1 = video.subclip(0, 10)
+vid2 = video.subclip(20, 40)
+final_vid = pyedit.concatenate_videoclips([vid1, vid2])
+
+# Speed up the video
+final_vid = final_vid.speedx(2)
+
+# Add audio to the video
+aud = pyedit.AudioFileClip("bg.mp3")
+final_vid = final_vid.set_audio(aud)
+
+# Reverse the video
+final_vid = final_vid.fx(pyedit.vfx.time_mirror)
+
+# Merge two videos
+vid1 = pyedit.VideoFileClip("vid1.mp4")
+vid2 = pyedit.VideoFileClip("vid2.mp4")
+final_vid = pyedit.concatenate_videoclips([vid1, vid2])
+
+# Add VFX to the video
+vid1 = final_vid.fx(pyedit.vfx.mirror_x)
+vid2 = final_vid.fx(pyedit.vfx.invert_colors)
+final_vid = pyedit.concatenate_videoclips([vid1, vid2])
+
+# Add images to the video
+img1 = pyedit.ImageClip("img1.jpg")
+img2 = pyedit.ImageClip("img2.jpg")
+final_vid = pyedit.concatenate_videoclips([img1, img2])
+
+# Save the final video
+final_vid.write_videofile("final.mp4")
+3. Email Scheduler
+The Email Scheduler is a powerful Python automation script that allows you to schedule and send emails automatically at specific times. With this script, you can say goodbye to manual email sending and hello to effortless communication with your contacts.
+
+This script allows you to schedule and send emails at a specific time automatically. It uses the smtplib and schedule modules.
+
+# Email Scheduler
+import smtplib
+import schedule
+import time
+
+def send_email():
+    sender_email = "your_email@gmail.com"
+    receiver_email = "recipient_email@gmail.com"
+    password = "your_email_password"
+
+    subject = "Automated Email"
+    body = "This is an automated email sent using Python."
+
+    message = f"Subject: {subject}\n\n{body}"
+
+    with smtplib.SMTP_SSL("smtp.gmail.com", 465) as server:
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message)
+
+# Schedule the email to be sent daily at 8 AM
+schedule.every().day.at("08:00").do(send_email)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+4. Social Media Auto-Poster
+The Social Media Auto-Poster is a powerful Python script that streamlines your social media presence and makes managing multiple platforms a breeze. With this script, you can schedule and automate the posting of content across various social media channels, such as Twitter, Facebook, LinkedIn, and more. This script uses the tweepy library to automatically post content to Twitter at scheduled intervals.
+
+# Social Media Auto-Poster
+import tweepy
+import schedule
+import time
+
+def post_to_twitter():
+    api_key = "YOUR_API_KEY"
+    api_secret = "YOUR_API_SECRET"
+    access_token = "YOUR_ACCESS_TOKEN"
+    access_token_secret = "YOUR_ACCESS_TOKEN_SECRET"
+
+    auth = tweepy.OAuthHandler(api_key, api_secret)
+    auth.set_access_token(access_token, access_token_secret)
+    api = tweepy.API(auth)
+
+    tweet = "This is an automated tweet using Python!"
+
+    api.update_status(tweet)
+
+# Schedule the tweet to be posted every 6 hours
+schedule.every(6).hours.do(post_to_twitter)
+
+while True:
+    schedule.run_pending()
+    time.sleep(1)
+5. Convert PDF to Image
+Converting PDF to image is a common task in various industries, from document processing to graphic design. PDF (Portable Document Format) files are widely used for sharing documents while maintaining their formatting across different devices and platforms. However, sometimes you may need to extract individual pages from a PDF or convert the entire document into image format for further processing or display.
+
+This script uses the PyMuPDF module to convert PDF pages into images effortlessly.
+
+# PDF to Images
+import fitz
+
+def pdf_to_images(pdf_file):
+    doc = fitz.open(pdf_file)
+    for page in doc:
+        pix = page.get_pixmap()
+        output = f"page{page.number}.png"
+        pix.writePNG(output)
+
+pdf_to_images("test.pdf")
+6. Get API Data
+The "Get API Data" automation script in python is a game-changer when it comes to retrieving data from APIs effortlessly. In today's digital age, we rely on various web services to obtain valuable information, but manually fetching data can be time-consuming. This script demonstrates how to fetch API data using the urllib3 module to perform GET and POST requests.
+
+# Get API Data
+import urllib3
+
+# Fetch API data using GET request
+url = "https://api.github.com/users/psf/repos"
+http = urllib3.PoolManager()
+response = http.request('GET', url)
+print("Status Code:", response.status)
+print("Response Data:", response.data)
+
+# Post API data using POST request
+url = "https://httpbin.org/post"
+http = urllib3.PoolManager()
+response = http.request('POST', url, fields={'hello': 'world'})
+print("Status Code:", response.status)
+It uses the urllib3 library to make HTTP requests. The `GET` request fetches data from the specified URL, and the `POST` request sends data to the specified URL. The `status` code of the response indicates whether the request was successful.
+
+7. Battery Indicator Light
+The Battery Indicator Light script is a nifty Python automation that ensures you never miss a beat when it comes to your device's battery life. With this handy tool, you can set a specific battery percentage threshold, and the script will keep a watchful eye on your battery's level.
+
+This script uses the plyer and psutil modules to notify the user when the battery percentage is low.
+
+# Battery Notifier
+from plyer import notification
+import psutil
+from time import sleep
+
+while True:
+    battery = psutil.sensors_battery()
+    life = battery.percent
+
+    if life < 50:
+        notification.notify(
+            title="Battery Low",
+            message="Please connect to a power source",
+            timeout=10
+        )
+    sleep(50)
+8. Web Scraping
+Web scraping is a powerful technique used to extract data from websites. It involves automating the process of accessing web pages, extracting relevant information, and storing it in a structured format for further analysis or use. This process is invaluable for businesses, researchers, and data enthusiasts who seek to collect and analyze data from various sources on the internet.This script utilizes the requests and BeautifulSoup modules to scrape data from a website and extract specific information.
+
+# Web Scraping Script
+import requests
+from bs4 import BeautifulSoup
+
+url = "https://example.com"
+response = requests.get(url)
+
+soup = BeautifulSoup(response.text, "html.parser")
+
+# Extract specific data from the website
+data = soup.find("div", {"class": "content"}).get_text()
+print(data)
+9. Automated Testing with Pytest
+Automated testing is a crucial aspect of modern software development, enabling developers to validate their code, catch bugs, and ensure the reliability of their applications. In the realm of Python, one testing framework stands out as a powerful and user-friendly solution: Pytest. This script demonstrates how to perform automated testing using the pytest framework to test Python code.
+
+# Automated Testing with Pytest
+import pytest
+
+# Function to be tested
+def add_numbers(x, y):
+    return x + y
+
+# Test cases for the function
+def test_addition():
+    assert add_numbers(1, 2) == 3
+    assert add_numbers(-1, 1) == 0
+    assert add_numbers(0, 0) == 0
+    assert add_numbers(10, 5) == 15
+
+if __name__ == "__main__":
+    pytest.main()
+10. File Backup and Sync
+The File Backup and Sync script is a powerful Python automation tool designed to take the hassle out of managing your files and ensuring their safety. Keeping important data secure and accessible is a top priority in today's digital age, and this script offers a simple yet effective solution.This script automatically backs up and syncs files between two directories, ensuring that both locations have the same content.
+
